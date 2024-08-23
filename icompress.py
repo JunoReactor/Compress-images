@@ -3,6 +3,8 @@ import argparse
 from PIL import Image, UnidentifiedImageError
 from datetime import datetime, timedelta
 
+Image.MAX_IMAGE_PIXELS = None
+
 def convert_bytes_to_mb(bytes):
     return bytes / (1024 * 1024)
 
