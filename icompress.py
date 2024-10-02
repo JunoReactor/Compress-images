@@ -78,12 +78,14 @@ def process_directory(directory, days, log):
         for file in files:
             if file.lower().endswith('.jpg') or file.lower().endswith('.jpeg'):
                 file_path = os.path.join(root, file)
-                if os.path.getsize(file_path) == 0:
-                    print(f"{YELLOW}Пропуск: Файл 0 Кб: {file_path}{RESET}")
-                    zero_kb_files += 1
-                    continue  # Пропускаем файл 0 Кб
 
                 if is_recently_created(file_path, days):
+                    if os.path.getsize(file_path) == 0:
+                        #if(log == 1):
+                        print(f"{YELLOW}Пропуск: Файл 0 Кб: {file_path}{RESET}")
+                        zero_kb_files += 1
+                        continue  # Пропускаем файл 0 Кб
+
                     try:
                         if not is_optimized(file_path):
                             original_size, optimized_size, resize_text = optimize_image(file_path)
